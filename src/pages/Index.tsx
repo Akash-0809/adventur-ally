@@ -12,11 +12,24 @@ const Index = () => {
     <main className="min-h-screen bg-background">
       <Header />
       <Hero />
-      <ItineraryModule />
-      <DiaryModule />
-      <ExpensesModule />
-      <GamificationModule />
-      <SafetyModule />
+      <section id="itinerary">
+        <ItineraryModule />
+      </section>
+      <section id="diary">
+        <DiaryModule />
+      </section>
+      <section id="expenses">
+        <ExpensesModule />
+      </section>
+      <section id="gamification">
+        <GamificationModule />
+      </section>
+      <section id="ar">
+        {/* AR/Explore module would go here */}
+      </section>
+      <section id="safety">
+        <SafetyModule />
+      </section>
     </main>
   );
 };

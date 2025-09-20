@@ -47,13 +47,21 @@ const Header = () => {
   };
 
   const navItems = [
-    { key: 'itinerary', path: '/itinerary' },
-    { key: 'diary', path: '/diary' },
-    { key: 'expenses', path: '/expenses' },
-    { key: 'gamification', path: '/achievements' },
-    { key: 'ar', path: '/explore' },
-    { key: 'safety', path: '/safety' },
+    { key: 'itinerary', section: 'itinerary' },
+    { key: 'diary', section: 'diary' },
+    { key: 'expenses', section: 'expenses' },
+    { key: 'gamification', section: 'gamification' },
+    { key: 'ar', section: 'ar' },
+    { key: 'safety', section: 'safety' },
   ];
+
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    setIsMenuOpen(false);
+  };
 
   return (
     <header className="bg-background/95 backdrop-blur-sm border-b border-border/50 sticky top-0 z-50">
@@ -70,13 +78,13 @@ const Header = () => {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
-              <a
+              <button
                 key={item.key}
-                href={item.path}
+                onClick={() => scrollToSection(item.section)}
                 className="text-muted-foreground hover:text-primary transition-colors duration-200"
               >
                 {t(`nav.${item.key}`)}
-              </a>
+              </button>
             ))}
           </nav>
 
@@ -95,6 +103,12 @@ const Header = () => {
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => changeLanguage('hi')}>
                   हिंदी
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => changeLanguage('ml')}>
+                  മലയാളം
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => changeLanguage('ta')}>
+                  தமிழ்
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -150,19 +164,18 @@ const Header = () => {
           </div>
         </div>
 
-        {/* Mobile Navigation */}
+          {/* Mobile Navigation */}
         {isMenuOpen && (
           <nav className="md:hidden mt-4 pt-4 border-t border-border/50">
             <div className="flex flex-col space-y-3">
               {navItems.map((item) => (
-                <a
+                <button
                   key={item.key}
-                  href={item.path}
-                  className="text-muted-foreground hover:text-primary transition-colors duration-200 py-2"
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={() => scrollToSection(item.section)}
+                  className="text-muted-foreground hover:text-primary transition-colors duration-200 py-2 text-left"
                 >
                   {t(`nav.${item.key}`)}
-                </a>
+                </button>
               ))}
             </div>
           </nav>
